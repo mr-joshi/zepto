@@ -1,8 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import Image from "next/image";
-import { fileURLToPath } from "url";
-
+import './index.css'
 interface SearchableDropdownProps {
   options: Option[];
   setPills: (pills: Option[]) => void;
@@ -81,9 +80,7 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
 
   return (
     <div
-      style={{
-        position: "relative",
-      }}
+      className="searchable-dropdown"
     >
       <input
         ref={ref}
@@ -93,32 +90,15 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
         onKeyDown={handleBackSpace}
         value={inputValue}
         onChange={handleInputChange}
-        style={{
-          padding: "10px",
-          width: "250px",
-          border: "none",
-          outline: "none",
-          background: "transparent",
-        }}
+        className="input-field"
       />
       {focused ? (
         <div
-          style={{
-            position: "absolute",
-            top: "35px",
-            zIndex: 100,
-            background: "green",
-            width: "100%",
-          }}
+        className="dropdown-menu"  
         >
           {filteredOptions.map((option) => (
             <div
-              style={{
-                cursor: "pointer",
-                padding: "10px",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
+             className="dropdown-option"
               key={option.label}
               onMouseDown={(e) => e.preventDefault()}
               onClick={() => handleOptionClick(option)}
@@ -129,22 +109,18 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
                   alt="Profile"
                   width={30}
                   height={30}
-                  style={{
-                    borderRadius: "50%",
-                  }}
+                 className="profile-image "
                 />
               </div>
               <div
-                style={{
-                  fontSize: "10x",
-                }}
+               className="label-email" 
               >
                 {option.label}
               </div>
               <div
-                style={{
-                  fontSize: "10x",
-                }}
+               className="label-email" 
+
+               
               >
                 {option.email}
               </div>

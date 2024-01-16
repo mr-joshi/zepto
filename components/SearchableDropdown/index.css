@@ -1,0 +1,35 @@
+.searchable-dropdown {
+  position: relative;
+}
+
+.input-field {
+  padding: 10px;
+  width: 250px;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 35px;
+  z-index: 100;
+  background: green;
+  width: 100%;
+}
+
+.dropdown-option {
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-image {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.label-email {
+  font-size: 10px;
+}
