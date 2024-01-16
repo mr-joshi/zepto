@@ -48,27 +48,30 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
     if (ref.current?.value.length !== 0 || pills.length === 0) {
       return;
     }
-
+  
     if (event.key === "Backspace") {
       if (pills[pills.length - 1].highlighted) {
         // delete the last pill
-        const updatedPills = [...pills];
-        updatedPills[updatedPills.length - 1].highlighted = false;
-        setOptions([...options, updatedPills[pills.length - 1]]);
+          const updatedPills = [...pills];
+          updatedPills[updatedPills.length - 1].highlighted = false;
+          setOptions([...options, updatedPills[pills.length - 1]]);
         setFilteredOptions([...options, updatedPills[pills.length - 1]]);
-        updatedPills.pop();
-        setPills(updatedPills);
+          updatedPills.pop();
+          setPills(updatedPills);
       } else {
         // high light the last pill
         const updatedPills = [...pills];
         updatedPills[updatedPills.length - 1].highlighted = true;
         setPills(updatedPills);
-      }
-
-      // Prevent the default backspace behavior
-      event.preventDefault();
+        }
+  
+        // Prevent the default backspace behavior
+        event.preventDefault();
+      
     }
   };
+  
+  
 
   const handleOptionClick = (option: Option) => {
     setInputValue("");
@@ -76,6 +79,50 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
     const filtered = options.filter((obj) => obj.email !== option.email);
     setOptions(filtered);
     setFilteredOptions(filtered); // Reset filtered options when an option is selected
+  };
+
+  const handleArrowUpDown = (direction: "up" | "down") => {
+    const currentIndex = filteredOptions.findIndex((option) => option.highlighted);
+    const nextIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
+
+    const newIndex = nextIndex < 0 ? filteredOptions.length - 1 : nextIndex % filteredOptions.length;
+
+    const updatedOptions = filteredOptions.map((option, index) => ({
+      ...option,
+      highlighted: index === newIndex,
+    }));
+
+    setFilteredOptions(updatedOptions);
+  };
+
+  const handleEnterKey = () => {
+    const highlightedOption = filteredOptions.find((option) => option.highlighted);
+    if (highlightedOption) {
+      setInputValue("");
+      setPills([...pills, { ...highlightedOption, highlighted: false }]); // Ensure highlighted is set to false
+      const filtered = options.filter((obj) => obj.email !== highlightedOption.email);
+      setOptions(filtered);
+      setFilteredOptions(filtered); // Reset filtered options when an option is selected
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    switch (event.key) {
+      case "ArrowUp":
+        handleArrowUpDown("up");
+        break;
+      case "ArrowDown":
+        handleArrowUpDown("down");
+        break;
+      case "Enter":
+        handleEnterKey();
+        break;
+       case "Backspace":
+        handleBackSpace(event);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -88,9 +135,10 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
         type="text"
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
-        onKeyDown={handleBackSpace}
+        // onKeyDown={handleBackSpace}
         value={inputValue}
         onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
         className="input-field"
       />
       {focused ? (
