@@ -121,8 +121,6 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
               </div>
               <div
                className="label-email" 
-
-               
               >
                 {option.email}
               </div>
