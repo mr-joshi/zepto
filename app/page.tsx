@@ -36,7 +36,7 @@ export default function Home() {
     }[]
   >([]);
   const [filteredOptions, setFilteredOptions] = useState<Option[]>(options);
-
+//move to component
   const Pill = (props: {
     option: {
       label: string;
