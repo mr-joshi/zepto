@@ -49,8 +49,9 @@ export default function Home() {
       <div
       className={`pill ${props.option.highlighted ? "pillHighlighted" : ""}`}
     >
-      {props.option.label}
+      <span>{props.option.label}</span>
       <button
+      className="btnPill"
         onClick={() => {
           setPills(pills.filter((pill) => pill !== props.option));
           setOptions([...options, props.option]);

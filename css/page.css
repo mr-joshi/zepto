@@ -13,6 +13,13 @@
   margin: 5px 10px;
   background: green;
   width: fit-content;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+}
+.btnPill{
+  margin-left: 10px;
+
 }
 
 .pillHighlighted {
