@@ -81,6 +81,7 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
   return (
     <div
       className="searchable-dropdown"
+      
     >
       <input
         ref={ref}
@@ -94,7 +95,7 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
       />
       {focused ? (
         <div
-        className="dropdown-menu"  
+        className="dropdown dropdown-menu"  
         >
           {filteredOptions.map((option) => (
             <div
@@ -102,6 +103,7 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
               key={option.label}
               onMouseDown={(e) => e.preventDefault()}
               onClick={() => handleOptionClick(option)}
+            
             >
               <div>
                 <Image

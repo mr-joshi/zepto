@@ -2,6 +2,7 @@
 import dynamic from "next/dynamic";
 import React, { useState, useRef } from "react";
 import '../css/page.css'
+import { OPTIONS_DATA } from "@/constants/OptionsData";
 
 const SearchableDropdown = dynamic(
   () => import("@/components/SearchableDropdown/SearchableDropdown"),
@@ -25,26 +26,7 @@ interface SearchableDropdownProps {
 // If not we can unique id's to be unique
 // Keeping email as unique as it is generally unique for users
 export default function Home() {
-  const [options, setOptions] = useState<Option[]>([
-    {
-      label: "Option 1",
-      email: "1LqJ3@example.com",
-      profileImage: "https://via.placeholder.com/150",
-      highlighted: false,
-    },
-    {
-      label: "Option 2",
-      email: "2LqJ3@example.com",
-      profileImage: "https://via.placeholder.com/150",
-      highlighted: false,
-    },
-    {
-      label: "Option 3",
-      email: "3LqJ3@example.com",
-      profileImage: "https://via.placeholder.com/150",
-      highlighted: false,
-    },
-  ]);
+  const [options, setOptions] = useState<Option[]>(OPTIONS_DATA);
   const [pills, setPills] = useState<
     {
       label: string;

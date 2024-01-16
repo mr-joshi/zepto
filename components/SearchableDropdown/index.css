@@ -9,7 +9,10 @@
   outline: none;
   background: transparent;
 }
-
+.dropdown{
+  height: 200px;
+  overflow-y: scroll;
+}
 .dropdown-menu {
   position: absolute;
   top: 35px;
@@ -23,6 +26,7 @@
   padding: 10px;
   display: flex;
   justify-content: space-between;
+
 }
 
 .profile-image {
