@@ -1,6 +1,8 @@
 "use client";
 import dynamic from "next/dynamic";
 import React, { useState, useRef } from "react";
+import '../css/page.css'
+
 const SearchableDropdown = dynamic(
   () => import("@/components/SearchableDropdown/SearchableDropdown"),
   {
@@ -63,52 +65,37 @@ export default function Home() {
   }) => {
     return (
       <div
-        style={{
-          border: "2px solid green",
-          margin: "5px 10px",
-          background: props.option.highlighted ? "red" : "green",
-          width: "fit-content",
+      className={`pill ${props.option.highlighted ? "pillHighlighted" : ""}`}
+    >
+      {props.option.label}
+      <button
+        onClick={() => {
+          setPills(pills.filter((pill) => pill !== props.option));
+          setOptions([...options, props.option]);
+          setFilteredOptions([...options, props.option]);
         }}
       >
-        {props.option.label}
-        <button
-          onClick={() => {
-            setPills(pills.filter((pill) => pill !== props.option));
-            setOptions([...options, props.option]);
-            setFilteredOptions([...options, props.option]);
-          }}
-        >
-          R
-        </button>
-      </div>
+        X
+      </button>
+    </div>
     );
   };
 
   return (
-    <div
-      style={{
-        height: "500px",
-      }}
-    >
-      <div
-        style={{
-          border: "2px solid blue",
-          display: "flex",
-          borderRadius: "5px",
-        }}
-      >
-        {pills.map((pill) => (
-          <Pill key={pill.email} option={pill} />
-        ))}
-        <SearchableDropdown
-          options={options}
-          setPills={setPills}
-          pills={pills}
-          filteredOptions={filteredOptions}
-          setFilteredOptions={setFilteredOptions}
-          setOptions={setOptions}
-        />
-      </div>
+    <div className="homeContainer">
+    <div className="pillContainer">
+      {pills.map((pill) => (
+        <Pill key={pill.email} option={pill} />
+      ))}
+      <SearchableDropdown
+        options={options}
+        setPills={setPills}
+        pills={pills}
+        filteredOptions={filteredOptions}
+        setFilteredOptions={setFilteredOptions}
+        setOptions={setOptions}
+      />
     </div>
+  </div>
   );
 }

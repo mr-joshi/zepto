@@ -1,0 +1,20 @@
+.homeContainer {
+  height: 500px;
+}
+
+.pillContainer {
+  border: 2px solid blue;
+  display: flex;
+  border-radius: 5px;
+}
+
+.pill {
+  border: 2px solid green;
+  margin: 5px 10px;
+  background: green;
+  width: fit-content;
+}
+
+.pillHighlighted {
+  background: red;
+}
